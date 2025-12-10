@@ -239,25 +239,25 @@
                 <span class="bg-pink-500 w-2 h-8 mr-3 rounded-full"></span>
                 Góc Tâm Sự & Chia Sẻ
             </h2>
-            <p class="text-slate-700 mb-6">Bạn có câu chuyện của riêng mình muốn chia sẻ? Đừng ngần ngại gửi cho chúng tôi. Câu chuyện của bạn có thể là nguồn động viên lớn lao cho người khác.</p>
+            <p class="text-slate-700 mb-6">Bạn có câu chuyện của riêng mình muốn chia sẻ? Hãy gửi ẩn danh cho chúng tôi. Chúng tôi sẽ đọc và lắng nghe.</p>
             
-            <form class="space-y-4" action="mailto:admin@example.com" method="post" enctype="text/plain">
-                <div>
+            <form id="emailForm" class="space-y-4">
+                <input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_subject" value="Tâm sự mới từ Website Gaslighting"> <div>
                     <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Tên của bạn (hoặc biệt danh)</label>
-                    <input type="text" id="name" name="name" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition" placeholder="Người ẩn danh">
+                    <input type="text" id="name" name="name" required class="w-full p-3 bg-slate-50 rounded-xl border border-slate-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition" placeholder="Người ẩn danh">
                 </div>
                 <div>
                     <label for="story" class="block text-sm font-medium text-slate-700 mb-1">Câu chuyện của bạn</label>
-                    <textarea id="story" name="story" rows="5" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none resize-none transition" placeholder="Hãy chia sẻ những gì bạn đã trải qua..."></textarea>
+                    <textarea id="story" name="message" required rows="5" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none resize-none transition" placeholder="Hãy chia sẻ những gì bạn đã trải qua..."></textarea>
                 </div>
-                <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-xl font-bold transition shadow-md flex items-center">
+                <button type="submit" id="sendEmailBtn" class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-xl font-bold transition shadow-md flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                     </svg>
                     Gửi câu chuyện
                 </button>
-                <p class="text-xs text-slate-500 mt-2 italic">*Nút này sẽ mở ứng dụng email của bạn để gửi thư.</p>
             </form>
+            <p id="emailStatus" class="mt-4 text-center font-bold hidden"></p>
         </div>
         <div class="md:col-span-2 flex justify-center order-first md:order-last">
             <img src="https://github.com/nhandream56/glasslien/blob/main/images/image_6.jpg?raw=true" alt="Cân bằng cảm xúc" class="rounded-2xl shadow-lg max-h-72 object-cover transform hover:scale-105 transition duration-300">
@@ -271,11 +271,11 @@
   </main>
 
   <script>
+    /* --- PHẦN 1: LOGIC CHAT AI (GIỮ NGUYÊN) --- */
     const chatHistoryDiv = document.getElementById('chatHistory');
     const userPromptInput = document.getElementById('userPrompt');
     const sendBtn = document.getElementById('sendMessageBtn');
 
-    // Lịch sử hội thoại mẫu
     let conversationHistory = [
       {
         role: "user",
@@ -292,9 +292,7 @@
       div.className = isError 
         ? 'error-msg' 
         : (role === 'user' ? 'user-msg p-4 text-sm shadow-sm mb-4' : 'ai-msg p-4 text-sm shadow-sm mb-4');
-      
       div.innerHTML = (role === 'model' && !isError) ? marked.parse(text) : text.replace(/\n/g, '<br>');
-      
       chatHistoryDiv.appendChild(div);
       chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
     }
@@ -358,6 +356,60 @@
     userPromptInput.addEventListener('input', function() {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    /* --- PHẦN 2: LOGIC GỬI EMAIL (FORMSUBMIT.CO) --- */
+    const emailForm = document.getElementById('emailForm');
+    const emailStatus = document.getElementById('emailStatus');
+    const sendEmailBtn = document.getElementById('sendEmailBtn');
+
+    emailForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // Ngăn load lại trang
+        
+        // Hiệu ứng đang gửi
+        sendEmailBtn.innerHTML = 'Đang gửi...';
+        sendEmailBtn.disabled = true;
+        sendEmailBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+        const formData = new FormData(emailForm);
+
+        // Gửi dữ liệu tới FormSubmit
+        fetch('https://formsubmit.co/ajax/gaslightingln@gmail.com', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Gửi thành công
+            emailForm.reset(); // Xóa trắng form
+            emailStatus.textContent = "✅ Gửi thành công! Cảm ơn bạn đã chia sẻ.";
+            emailStatus.classList.remove('hidden', 'text-red-600');
+            emailStatus.classList.add('text-green-600');
+            
+            // Khôi phục nút bấm
+            sendEmailBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                </svg> Gửi câu chuyện`;
+            sendEmailBtn.disabled = false;
+            sendEmailBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+            // Ẩn thông báo sau 5 giây
+            setTimeout(() => {
+                emailStatus.classList.add('hidden');
+            }, 5000);
+        })
+        .catch(error => {
+            // Gửi thất bại
+            emailStatus.textContent = "❌ Có lỗi xảy ra. Vui lòng thử lại sau.";
+            emailStatus.classList.remove('hidden', 'text-green-600');
+            emailStatus.classList.add('text-red-600');
+            
+            sendEmailBtn.innerHTML = 'Thử lại';
+            sendEmailBtn.disabled = false;
+            sendEmailBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            console.error('Error:', error);
+        });
     });
   </script>
 </body>
