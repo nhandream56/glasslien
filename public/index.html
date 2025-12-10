@@ -37,7 +37,7 @@
 <body class="bg-slate-50 text-slate-800 leading-relaxed">
   
   <header class="relative w-full h-64 md:h-96 overflow-hidden bg-slate-900 flex items-center justify-center">
-    <img src="/images/image_1.jpg" alt="Tay điều khiển não và tim" class="absolute inset-0 w-full h-full object-cover opacity-60">
+    <img src="https://github.com/nhandream56/glasslien/blob/main/images/image_1.png?raw=true" alt="Tay điều khiển não và tim" class="absolute inset-0 w-full h-full object-cover opacity-60">
     <div class="relative z-10 text-center p-4 fade-in-up">
       <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2 text-shadow-lg">
         Thao Túng Tâm Lý <br class="md:hidden">(Gaslighting)
@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="flex justify-center">
-            <img src="/images/image_2.jpg" alt="Người gỡ rối tơ lòng" class="rounded-2xl shadow-lg max-h-80 object-cover transform hover:scale-105 transition duration-300">
+            <img src="https://github.com/nhandream56/glasslien/blob/main/images/image_2.jpg?raw=true" alt="Người gỡ rối tơ lòng" class="rounded-2xl shadow-lg max-h-80 object-cover transform hover:scale-105 transition duration-300">
         </div>
       </div>
     </section>
@@ -90,7 +90,7 @@
           <span class="bg-orange-500 w-2 h-8 mr-3 rounded-full"></span>
           Biểu hiện thường gặp
         </h2>
-        <img src="/images/image_4.jpg" alt="Bàn tay thao túng rối ren" class="w-full h-48 object-cover rounded-2xl mb-6 shadow-sm">
+        <img src="https://github.com/nhandream56/glasslien/blob/main/images/image_4.jpg?raw=true" alt="Bàn tay thao túng rối ren" class="w-full h-48 object-cover rounded-2xl mb-6 shadow-sm">
         <ul class="space-y-3 text-slate-700 font-medium">
           <li class="flex items-start"><span class="text-orange-500 mr-2">Is</span> Phủ nhận sự thật trơ trẽn ("Tao chưa bao giờ nói thế!").</li>
           <li class="flex items-start"><span class="text-orange-500 mr-2">Is</span> Bóp méo thông tin, kể lại sự việc theo hướng có lợi cho họ.</li>
@@ -104,7 +104,7 @@
           <span class="bg-red-600 w-2 h-8 mr-3 rounded-full"></span>
           Tác động tiêu cực
         </h2>
-        <img src="/images/image_3.jpg" alt="Đi trên dây giữa hai tâm trí" class="w-full h-48 object-cover rounded-2xl mb-6 shadow-sm">
+        <img src="https://github.com/nhandream56/glasslien/blob/main/images/image_3.jpg?raw=true" alt="Đi trên dây giữa hai tâm trí" class="w-full h-48 object-cover rounded-2xl mb-6 shadow-sm">
         <ul class="space-y-3 text-slate-700 font-medium">
           <li class="flex items-start"><span class="text-red-600 mr-2">Is</span> Mất niềm tin vào bản thân và khả năng phán đoán.</li>
           <li class="flex items-start"><span class="text-red-600 mr-2">Is</span> Thường xuyên lo âu, bất an, cảm thấy mình "có vấn đề".</li>
@@ -118,7 +118,7 @@
     <section class="bg-white p-6 md:p-8 rounded-3xl shadow-xl card-hover fade-in-up">
       <div class="grid md:grid-cols-5 gap-8 items-center">
         <div class="md:col-span-2 flex justify-center">
-            <img src="/images/image_5.jpg" alt="Não và tim thiền định" class="rounded-2xl shadow-lg max-h-72 object-cover transform hover:scale-105 transition duration-300">
+            <img src="https://github.com/nhandream56/glasslien/blob/main/images/image_5.jpg?raw=true" alt="Não và tim thiền định" class="rounded-2xl shadow-lg max-h-72 object-cover transform hover:scale-105 transition duration-300">
         </div>
         <div class="md:col-span-3">
           <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center">
@@ -210,7 +210,7 @@
             </form>
         </div>
         <div class="md:col-span-2 flex justify-center order-first md:order-last">
-            <img src="/images/image_7.jpg" alt="Cân bằng cảm xúc" class="rounded-2xl shadow-lg max-h-72 object-cover transform hover:scale-105 transition duration-300">
+            <img src="https://github.com/nhandream56/glasslien/blob/main/images/image_6.jpg?raw=true" alt="Cân bằng cảm xúc" class="rounded-2xl shadow-lg max-h-72 object-cover transform hover:scale-105 transition duration-300">
         </div>
       </div>
     </section>
@@ -244,11 +244,10 @@
         ? 'error-msg' 
         : (role === 'user' ? 'user-msg p-4 text-sm shadow-sm mb-4' : 'ai-msg p-4 text-sm shadow-sm mb-4');
       
-      // Sử dụng marked để render Markdown cho tin nhắn của AI, thay thế xuống dòng cho user
       div.innerHTML = (role === 'model' && !isError) ? marked.parse(text) : text.replace(/\n/g, '<br>');
       
       chatHistoryDiv.appendChild(div);
-      chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight; // Tự động cuộn xuống cuối
+      chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
     }
 
     // Hàm hiển thị hiệu ứng đang nhập
@@ -261,7 +260,6 @@
       chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
     }
 
-    // Hàm xóa hiệu ứng đang nhập
     function removeLoading() {
       const loading = document.getElementById('loadingIndicator');
       if(loading) loading.remove();
@@ -272,19 +270,17 @@
       const userText = userPromptInput.value.trim();
       if (!userText) return;
 
-      // 1. Hiển thị tin nhắn của người dùng
       appendMessage('user', userText);
       userPromptInput.value = '';
-      userPromptInput.style.height = 'auto'; // Reset chiều cao textarea
+      userPromptInput.style.height = 'auto';
       showLoading();
 
       try {
-        // 2. Gửi yêu cầu lên Server Vercel (api/chat.js)
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
-            history: conversationHistory, // Gửi kèm lịch sử để AI nhớ ngữ cảnh
+            history: conversationHistory,
             message: userText 
           })
         });
@@ -293,24 +289,18 @@
         removeLoading();
 
         if (!response.ok || data.error) {
-          // Hiển thị lỗi nếu server trả về lỗi
           appendMessage('model', `Lỗi: ${data.error}`, true);
         } else {
-          // Hiển thị phản hồi từ AI
           appendMessage('model', data.reply);
-          
-          // Cập nhật lịch sử hội thoại
           conversationHistory.push({ role: "user", parts: [{ text: userText }] });
           conversationHistory.push({ role: "model", parts: [{ text: data.reply }] });
         }
       } catch (error) {
-        // Xử lý lỗi mạng
         removeLoading();
         appendMessage('model', `Lỗi kết nối. Vui lòng kiểm tra mạng của bạn.`, true);
       }
     });
 
-    // Cho phép ấn Enter để gửi (Shift+Enter để xuống dòng)
     userPromptInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -318,7 +308,6 @@
       }
     });
 
-    // Tự động thay đổi chiều cao textarea khi nhập
     userPromptInput.addEventListener('input', function() {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
