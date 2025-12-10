@@ -32,6 +32,10 @@
     .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
     .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
     @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+    /* Table Styles */
+    .custom-table th, .custom-table td { border: 1px solid #e2e8f0; padding: 16px; vertical-align: top; }
+    .custom-table tr:nth-child(even) { background-color: #f8fafc; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 leading-relaxed">
@@ -73,15 +77,61 @@
     </section>
 
     <section class="bg-white p-6 md:p-8 rounded-3xl shadow-xl card-hover fade-in-up delay-400">
-      <h2 class="text-3xl font-bold text-slate-900 mb-8 flex items-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center">
         <span class="bg-purple-600 w-2 h-8 mr-3 rounded-full"></span>
         Bảng so sánh chi tiết
       </h2>
-      <div class="overflow-hidden rounded-2xl shadow-md border border-slate-200">
-        <img src="/images/image_8.jpg" alt="Bảng so sánh phần 1" class="w-full h-auto border-b border-slate-100">
-        <img src="/images/image_0.jpg" alt="Bảng so sánh phần 2" class="w-full h-auto -mt-px">
+      
+      <div class="overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full text-left border-collapse custom-table min-w-[700px]">
+          <thead>
+            <tr class="bg-slate-100 text-slate-800">
+              <th class="w-1/6 font-extrabold text-center">Tiêu chí</th>
+              <th class="w-5/12 text-red-700 text-lg">Gaslighting</th>
+              <th class="w-5/12 text-blue-700 text-lg">Self-gaslighting</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-700">
+            <tr>
+              <td class="font-bold text-center bg-slate-50">Khái niệm</td>
+              <td>Một hình thức lạm dụng tâm lý từ bên ngoài, trong đó kẻ thao túng cố tình làm nạn nhân nghi ngờ thực tế, ký ức hoặc nhận thức của chính mình để kiểm soát hoặc lợi dụng.</td>
+              <td>Quá trình tự thao túng bản thân, nơi cá nhân tự làm mình nghi ngờ cảm xúc, suy nghĩ hoặc trải nghiệm, thường do hậu quả của gaslighting từ người khác hoặc chấn thương nội tại.</td>
+            </tr>
+            <tr>
+              <td class="font-bold text-center bg-slate-50">Nguồn gốc</td>
+              <td>Đến từ người khác (như giáo viên, bạn bè, phụ huynh) nhằm duy trì quyền lực hoặc tránh trách nhiệm. Thường xuất hiện trong mối quan hệ bất cân bằng quyền lực.</td>
+              <td>Nội hóa từ trải nghiệm lạm dụng bên ngoài, áp lực xã hội hoặc chấn thương quá khứ, dẫn đến "kẻ thao túng nội tâm" tự phủ nhận thực tế của chính mình.</td>
+            </tr>
+            <tr>
+              <td class="font-bold text-center bg-slate-50">Biểu hiện chính</td>
+              <td>
+                <ul class="list-disc pl-4 space-y-1">
+                  <li>Phủ nhận sự kiện hoặc ký ức.</li>
+                  <li>Làm lệch lạc thông tin.</li>
+                  <li>Chuyển hướng trách nhiệm ("Em quá nhạy cảm").</li>
+                  <li>Cô lập nạn nhân.</li>
+                  <li>Thay đổi dần dần để kiểm soát.</li>
+                </ul>
+              </td>
+              <td>
+                <ul class="list-disc pl-4 space-y-1">
+                  <li>Tự phủ nhận cảm xúc ("Mình đang phóng đại").</li>
+                  <li>Tự trách móc quá mức.</li>
+                  <li>Bỏ qua trực giác.</li>
+                  <li>Lặp lại lời chỉ trích từ quá khứ.</li>
+                  <li>Cảm giác tội lỗi liên tục.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td class="font-bold text-center bg-slate-50">Ảnh hưởng não bộ</td>
+              <td>Kích hoạt stress mãn tính, tổn thương hippocampus (trí nhớ), tăng cortisol dẫn đến suy giảm nhận thức.</td>
+              <td>Tạo "lối mòn suy nghĩ" tiêu cực, giảm hoạt động vùng não tự trọng, dẫn đến thay đổi cấu trúc não lâu dài.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <p class="text-center text-sm text-slate-500 mt-4 italic">Bảng so sánh sự khác biệt giữa Gaslighting và Self-gaslighting.</p>
+      <p class="text-center text-sm text-slate-500 mt-4 italic">So sánh sự khác biệt cơ bản giữa tác động bên ngoài và nội tâm.</p>
     </section>
 
     <section class="grid md:grid-cols-2 gap-8 fade-in-up">
@@ -225,7 +275,7 @@
     const userPromptInput = document.getElementById('userPrompt');
     const sendBtn = document.getElementById('sendMessageBtn');
 
-    // Lịch sử hội thoại mẫu để AI hiểu ngữ cảnh
+    // Lịch sử hội thoại mẫu
     let conversationHistory = [
       {
         role: "user",
@@ -237,7 +287,6 @@
       }
     ];
 
-    // Hàm thêm tin nhắn vào giao diện
     function appendMessage(role, text, isError = false) {
       const div = document.createElement('div');
       div.className = isError 
@@ -250,7 +299,6 @@
       chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
     }
 
-    // Hàm hiển thị hiệu ứng đang nhập
     function showLoading() {
       const div = document.createElement('div');
       div.id = 'loadingIndicator';
@@ -265,7 +313,6 @@
       if(loading) loading.remove();
     }
 
-    // Xử lý sự kiện gửi tin nhắn
     sendBtn.addEventListener('click', async () => {
       const userText = userPromptInput.value.trim();
       if (!userText) return;
