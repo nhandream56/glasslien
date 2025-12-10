@@ -1,189 +1,327 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gaslighting & AI Tâm sự</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nhận diện & Vượt qua Gaslighting</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    .title { color: #b91c1c; font-weight: 800; font-size: 2.25rem; opacity: 0; animation: fadeInUp 1s ease forwards 0.2s; }
+    /* Font & Chung */
+    body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    
+    /* Animation */
+    .fade-in-up { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease-out forwards; }
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); }}
-    .card-shadow { box-shadow: 0 8px 20px rgba(2,6,23,0.08); transition: transform 0.2s; }
-    .card-shadow:hover { transform: translateY(-2px); }
-    /* Chat bubbles */
-    .chat-container { height: 400px; overflow-y: auto; scroll-behavior: smooth; }
-    .user-msg { background-color: #dbeafe; color: #1e40af; border-radius: 18px 18px 4px 18px; margin-left: auto; max-width: 80%; }
-    .ai-msg { background-color: #f3f4f6; color: #1f2937; border-radius: 18px 18px 18px 4px; margin-right: auto; max-width: 90%; }
-    /* Loading dots */
-    .typing-indicator span { display: inline-block; width: 6px; height: 6px; background-color: #9ca3af; border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; margin: 0 1px; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-400 { animation-delay: 0.4s; }
+
+    /* Card & Shadow */
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+
+    /* Chat UI */
+    .chat-container { height: 500px; overflow-y: auto; scroll-behavior: smooth; }
+    .user-msg { background-color: #dbeafe; color: #1e40af; border-radius: 18px 18px 4px 18px; margin-left: auto; max-width: 85%; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .ai-msg { background-color: #f3f4f6; color: #1f2937; border-radius: 18px 18px 18px 4px; margin-right: auto; max-width: 90%; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .error-msg { background-color: #fee2e2; color: #991b1b; border: 1px solid #f87171; border-radius: 12px; padding: 12px; margin-bottom: 16px; font-size: 0.9rem; display: flex; align-items: center; }
+    .error-msg::before { content: '⚠️'; margin-right: 8px; font-size: 1.2em; }
+
+    /* Typing Indicator */
+    .typing-indicator span { display: inline-block; width: 8px; height: 8px; background-color: #9ca3af; border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; margin: 0 2px; }
     .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
     .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
     @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-slate-50 text-slate-800 leading-relaxed">
   
-  <div class="max-w-5xl mx-auto p-4 md:p-6">
-    <header class="mb-10 text-center">
-      <h1 class="title">Thao túng tâm lý (Gaslighting)</h1>
-      <p class="mt-2 text-gray-600">Nhận diện, phòng tránh và tâm sự cùng AI.</p>
-    </header>
+  <header class="relative w-full h-64 md:h-96 overflow-hidden bg-slate-900 flex items-center justify-center">
+    <img src="/images/image_1.png" alt="Tay điều khiển não và tim" class="absolute inset-0 w-full h-full object-cover opacity-60">
+    <div class="relative z-10 text-center p-4 fade-in-up">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2 text-shadow-lg">
+        Thao Túng Tâm Lý <br class="md:hidden">(Gaslighting)
+      </h1>
+      <p class="text-lg md:text-xl text-slate-200 font-medium">Nhận diện bóng tối, tìm lại ánh sáng cho chính mình.</p>
+    </div>
+  </header>
 
-    <main class="space-y-10">
-      
-      <div class="w-full flex justify-center shadow-lg rounded-xl overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1200&q=80&auto=format&fit=crop" alt="Gaslighting Banner" class="w-full object-cover h-48 md:h-80" />
+  <main class="max-w-5xl mx-auto p-4 md:p-8 space-y-16 -mt-10 relative z-20">
+
+    <section class="bg-white p-6 md:p-8 rounded-3xl shadow-xl card-hover fade-in-up delay-200">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center">
+            <span class="bg-indigo-600 w-2 h-8 mr-3 rounded-full"></span>
+            Định nghĩa
+          </h2>
+          <div class="space-y-6">
+            <div class="bg-red-50 p-5 rounded-xl border-l-4 border-red-500">
+              <h3 class="text-xl font-bold text-red-700 mb-2">Gaslighting (Thao túng từ bên ngoài)</h3>
+              <p class="text-slate-700">Hành vi cố tình làm người khác nghi ngờ nhận thức, trí nhớ và sự tỉnh táo của chính họ nhằm mục đích kiểm soát và chi phối.</p>
+            </div>
+            <div class="bg-blue-50 p-5 rounded-xl border-l-4 border-blue-500">
+              <h3 class="text-xl font-bold text-blue-700 mb-2">Self-Gaslighting (Tự thao túng)</h3>
+              <p class="text-slate-700">Hậu quả của việc bị thao túng lâu ngày, khiến nạn nhân tự nghi ngờ cảm xúc của mình, tự đổ lỗi cho bản thân ngay cả khi không làm gì sai.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center">
+            <img src="/images/image_2.png" alt="Người gỡ rối tơ lòng" class="rounded-2xl shadow-lg max-h-80 object-cover transform hover:scale-105 transition duration-300">
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white p-6 md:p-8 rounded-3xl shadow-xl card-hover fade-in-up delay-400">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 flex items-center">
+        <span class="bg-purple-600 w-2 h-8 mr-3 rounded-full"></span>
+        Bảng so sánh chi tiết
+      </h2>
+      <div class="overflow-hidden rounded-2xl shadow-md border border-slate-200">
+        <img src="/images/image_8.png" alt="Bảng so sánh phần 1" class="w-full h-auto border-b border-slate-100">
+        <img src="/images/image_0.png" alt="Bảng so sánh phần 2" class="w-full h-auto -mt-px">
+      </div>
+      <p class="text-center text-sm text-slate-500 mt-4 italic">Bảng so sánh sự khác biệt giữa Gaslighting và Self-gaslighting.</p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-8 fade-in-up">
+      <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl card-hover">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+          <span class="bg-orange-500 w-2 h-8 mr-3 rounded-full"></span>
+          Biểu hiện thường gặp
+        </h2>
+        <img src="/images/image_4.png" alt="Bàn tay thao túng rối ren" class="w-full h-48 object-cover rounded-2xl mb-6 shadow-sm">
+        <ul class="space-y-3 text-slate-700 font-medium">
+          <li class="flex items-start"><span class="text-orange-500 mr-2">Is</span> Phủ nhận sự thật trơ trẽn ("Tao chưa bao giờ nói thế!").</li>
+          <li class="flex items-start"><span class="text-orange-500 mr-2">Is</span> Bóp méo thông tin, kể lại sự việc theo hướng có lợi cho họ.</li>
+          <li class="flex items-start"><span class="text-orange-500 mr-2">Is</span> Đổ lỗi ngược ("Tại em quá nhạy cảm thôi").</li>
+          <li class="flex items-start"><span class="text-orange-500 mr-2">Is</span> Dùng lời khen giả tạo xen lẫn chỉ trích để gây hoang mang.</li>
+          <li class="flex items-start"><span class="text-orange-500 mr-2">Is</span> Cô lập bạn khỏi bạn bè, người thân.</li>
+        </ul>
+      </div>
+      <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl card-hover">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+          <span class="bg-red-600 w-2 h-8 mr-3 rounded-full"></span>
+          Tác động tiêu cực
+        </h2>
+        <img src="/images/image_3.png" alt="Đi trên dây giữa hai tâm trí" class="w-full h-48 object-cover rounded-2xl mb-6 shadow-sm">
+        <ul class="space-y-3 text-slate-700 font-medium">
+          <li class="flex items-start"><span class="text-red-600 mr-2">Is</span> Mất niềm tin vào bản thân và khả năng phán đoán.</li>
+          <li class="flex items-start"><span class="text-red-600 mr-2">Is</span> Thường xuyên lo âu, bất an, cảm thấy mình "có vấn đề".</li>
+          <li class="flex items-start"><span class="text-red-600 mr-2">Is</span> Rơi vào trạng thái trầm cảm, cô đơn.</li>
+          <li class="flex items-start"><span class="text-red-600 mr-2">Is</span> Khó khăn trong việc đưa ra quyết định.</li>
+          <li class="flex items-start"><span class="text-red-600 mr-2">Is</span> Phụ thuộc cảm xúc vào người thao túng.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="bg-white p-6 md:p-8 rounded-3xl shadow-xl card-hover fade-in-up">
+      <div class="grid md:grid-cols-5 gap-8 items-center">
+        <div class="md:col-span-2 flex justify-center">
+            <img src="/images/image_5.png" alt="Não và tim thiền định" class="rounded-2xl shadow-lg max-h-72 object-cover transform hover:scale-105 transition duration-300">
+        </div>
+        <div class="md:col-span-3">
+          <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center">
+            <span class="bg-green-500 w-2 h-8 mr-3 rounded-full"></span>
+            Phòng tránh & Chữa lành
+          </h2>
+          <div class="space-y-4">
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-4">1</div>
+                <p class="text-slate-700 mt-2"><strong>Tin vào trực giác:</strong> Nếu cảm thấy điều gì đó không ổn, rất có thể nó không ổn thật. Đừng phớt lờ cảm xúc của mình.</p>
+            </div>
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-4">2</div>
+                <p class="text-slate-700 mt-2"><strong>Ghi chép lại:</strong> Viết nhật ký, lưu tin nhắn làm bằng chứng để đối chiếu khi bị phủ nhận sự thật.</p>
+            </div>
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-4">3</div>
+                <p class="text-slate-700 mt-2"><strong>Thiết lập ranh giới:</strong> Học cách nói "không" và giữ khoảng cách với những người không tôn trọng bạn.</p>
+            </div>
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-4">4</div>
+                <p class="text-slate-700 mt-2"><strong>Tìm kiếm sự hỗ trợ:</strong> Chia sẻ với bạn bè tin cậy, người thân hoặc chuyên gia tâm lý để có góc nhìn khách quan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ai-chat" class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 fade-in-up">
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white">
+        <h2 class="text-2xl font-bold flex items-center gap-3">
+          🤖 Trợ lý ảo tâm lý (AI Beta)
+        </h2>
+        <p class="text-indigo-100 text-sm mt-2">Chia sẻ câu chuyện của bạn, AI sẽ lắng nghe và phân tích dựa trên kiến thức về Gaslighting.</p>
       </div>
 
-      <section id="dinh-nghia" class="bg-[#fff7ed] p-6 md:p-8 rounded-2xl card-shadow border border-orange-100">
-        <h2 class="text-2xl font-bold mb-6 text-orange-800 border-b pb-2 border-orange-200">Định nghĩa</h2>
-        <div class="grid md:grid-cols-2 gap-8 items-start">
-            <div class="space-y-4">
-                <h3 class="font-bold text-lg text-red-600">Gaslighting là gì?</h3>
-                <p class="text-sm">Là hành vi thao túng khiến bạn nghi ngờ chính ký ức và cảm nhận của mình.</p>
-            </div>
-            <div class="space-y-4">
-                <h3 class="font-bold text-lg text-blue-600">Self-gaslighting là gì?</h3>
-                <p class="text-sm">Là khi bạn tự nghi ngờ bản thân và biện minh cho kẻ thao túng.</p>
-            </div>
-        </div>
-      </section>
-
-      <section class="bg-white p-6 rounded-2xl card-shadow">
-          <h2 class="text-xl font-bold mb-4">Biểu hiện</h2>
-          <ul class="list-disc pl-5 space-y-2 text-gray-700">
-              <li>Phủ nhận thực tế ("Tao chưa bao giờ nói thế").</li>
-              <li>Bóp méo sự thật, đổ lỗi ngược lại cho bạn.</li>
-              <li>Cô lập bạn khỏi những người khác.</li>
-          </ul>
-      </section>
-
-      <section id="ai-consultant" class="bg-white p-1 rounded-2xl card-shadow overflow-hidden border-2 border-green-100">
-        <div class="bg-gradient-to-r from-green-600 to-teal-600 p-6 text-white rounded-t-xl">
-          <h2 class="text-2xl font-bold flex items-center gap-2">
-            🌱 Tâm sự cùng Gaslighting
-          </h2>
-          <p class="text-green-100 text-sm mt-1">AI đóng vai người bạn lắng nghe, bảo mật và ẩn danh hoàn toàn.</p>
-        </div>
-
-        <div class="p-6">
-          <div id="chatHistory" class="chat-container bg-gray-50 border border-gray-200 rounded-xl p-4 mb-4 space-y-4">
-            <div class="ai-msg p-3 text-sm shadow-sm">
-              Chào bạn! Mình là "Tâm sự Gaslighting". Mình ở đây để lắng nghe mọi chuyện bạn đang gặp phải. Bạn cứ kể đi, mình sẽ bảo vệ bạn. 🛡️
-            </div>
-          </div>
-
-          <div class="relative">
-            <textarea id="userPrompt" rows="3" class="w-full p-4 pr-24 bg-gray-100 rounded-xl border-transparent focus:bg-white focus:ring-2 focus:ring-green-500 outline-none resize-none" placeholder="Nhập câu chuyện của bạn..."></textarea>
-            <button id="sendMessageBtn" class="absolute bottom-3 right-3 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed">
-              Gửi tin
-            </button>
+      <div class="p-6 bg-slate-50">
+        <div id="chatHistory" class="chat-container bg-white border border-slate-200 rounded-2xl p-6 mb-6 shadow-inner space-y-4">
+          <div class="ai-msg p-4 text-sm shadow-sm">
+            Chào bạn! Mình là trợ lý AI. Mình ở đây để lắng nghe và hỗ trợ bạn phân tích các tình huống trong mối quan hệ. <br><br>
+            Bạn đang băn khoăn điều gì? Hãy kể cho mình nghe nhé. 🛡️
           </div>
         </div>
-      </section>
 
-      <section id="tam-su" class="bg-white p-6 rounded-2xl card-shadow border-t-4 border-blue-500">
-        <h2 class="text-xl font-bold mb-3">Gửi thư chia sẻ</h2>
-        <p class="text-sm text-gray-600 mb-6">Nếu bạn muốn gửi thư dài, hãy dùng form bên dưới.</p>
-        <div class="grid md:grid-cols-2 gap-8">
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Tên của bạn</label>
-            <input id="emailName" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" placeholder="Người ẩn danh" />
-            <label class="block text-sm font-medium mt-4 text-gray-700">Nội dung</label>
-            <textarea id="emailMessage" rows="5" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" placeholder="Viết thư..."></textarea>
-            <button id="sendEmailBtn" class="mt-4 px-6 py-2 rounded-lg bg-blue-600 text-white shadow-md">Gửi thư (Mở Mail)</button>
+        <div class="relative flex items-end space-x-2">
+          <div class="flex-grow relative">
+              <textarea id="userPrompt" rows="2" class="w-full p-4 pr-12 bg-white rounded-2xl border border-slate-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none resize-none shadow-sm transition text-slate-700" placeholder="Ví dụ: Người yêu mình luôn nói mình nhớ nhầm mọi thứ..."></textarea>
+              <div class="absolute right-3 bottom-3 text-slate-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9 3h9.0184M5.25 21h13.5c.966 0 1.75-.784 1.75-1.75V6.75c0-.966-.784-1.75-1.75-1.75H5.25c-.966 0-1.75.784-1.75 1.75v12.5c0 .966.784 1.75 1.75 1.75Z" />
+                  </svg>
+              </div>
           </div>
+          <button id="sendMessageBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-2xl font-medium transition shadow-md flex-shrink-0 group">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 transform group-hover:translate-x-1 transition">
+              <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+            </svg>
+          </button>
         </div>
-      </section>
+        <p class="text-xs text-center text-slate-500 mt-4">Lưu ý: AI có thể mắc lỗi. Thông tin chỉ mang tính tham khảo, không thay thế lời khuyên chuyên gia.</p>
+      </div>
+    </section>
 
-      <footer class="text-center text-xs text-gray-400 py-8 border-t mt-8">
-        &copy; 2025 Dự án Nhận Diện Gaslighting.
-      </footer>
-    </main>
-  </div>
+    <section class="bg-white p-6 md:p-8 rounded-3xl shadow-xl card-hover fade-in-up border-t-4 border-pink-500">
+      <div class="grid md:grid-cols-5 gap-8 items-center">
+        <div class="md:col-span-3">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 flex items-center">
+                <span class="bg-pink-500 w-2 h-8 mr-3 rounded-full"></span>
+                Góc Tâm Sự & Chia Sẻ
+            </h2>
+            <p class="text-slate-700 mb-6">Bạn có câu chuyện của riêng mình muốn chia sẻ? Đừng ngần ngại gửi cho chúng tôi. Câu chuyện của bạn có thể là nguồn động viên lớn lao cho người khác.</p>
+            
+            <form class="space-y-4" action="mailto:admin@example.com" method="post" enctype="text/plain">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Tên của bạn (hoặc biệt danh)</label>
+                    <input type="text" id="name" name="name" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition" placeholder="Người ẩn danh">
+                </div>
+                <div>
+                    <label for="story" class="block text-sm font-medium text-slate-700 mb-1">Câu chuyện của bạn</label>
+                    <textarea id="story" name="story" rows="5" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none resize-none transition" placeholder="Hãy chia sẻ những gì bạn đã trải qua..."></textarea>
+                </div>
+                <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-xl font-bold transition shadow-md flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>
+                    Gửi câu chuyện
+                </button>
+                <p class="text-xs text-slate-500 mt-2 italic">*Nút này sẽ mở ứng dụng email của bạn để gửi thư.</p>
+            </form>
+        </div>
+        <div class="md:col-span-2 flex justify-center order-first md:order-last">
+            <img src="/images/image_7.png" alt="Cân bằng cảm xúc" class="rounded-2xl shadow-lg max-h-72 object-cover transform hover:scale-105 transition duration-300">
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center text-sm text-slate-500 py-10 border-t border-slate-200">
+      <p>&copy; 2025 Dự án Nhận Diện Gaslighting. Vì một cộng đồng thấu cảm.</p>
+    </footer>
+  </main>
 
   <script>
-    /* --- LOGIC CHAT VỚI VERCEL SERVER --- */
     const chatHistoryDiv = document.getElementById('chatHistory');
     const userPromptInput = document.getElementById('userPrompt');
     const sendBtn = document.getElementById('sendMessageBtn');
 
-    // Lưu trữ lịch sử tại Client để gửi lên Server (Vì serverless không nhớ)
+    // Lịch sử hội thoại mẫu để AI hiểu ngữ cảnh
     let conversationHistory = [
       {
         role: "user",
-        parts: [{ text: "Bạn là một chuyên gia tâm lý thân thiện. Hãy lắng nghe câu chuyện về tình bạn, xác định xem có Gaslighting không và đưa ra lời khuyên ngắn gọn, cảm xúc. Dùng emoji." }]
+        parts: [{ text: "Bạn là một chuyên gia tâm lý học đường thân thiện, giàu lòng trắc ẩn. Nhiệm vụ của bạn là lắng nghe người dùng chia sẻ về các mối quan hệ của họ. Dựa trên kiến thức về Gaslighting và Self-gaslighting, hãy phân tích nhẹ nhàng xem họ có đang gặp phải các dấu hiệu này không. Hãy đưa ra những lời khuyên thiết thực, ngắn gọn và mang tính nâng đỡ. Sử dụng emoji để tạo cảm giác gần gũi. Nếu nhận thấy tình huống nghiêm trọng hoặc nguy hiểm, hãy khuyên họ tìm kiếm sự trợ giúp từ người lớn tin cậy hoặc chuyên gia tâm lý." }]
       },
       {
         role: "model",
-        parts: [{ text: "Chào bạn, mình là Tâm sự Gaslighting. Mình ở đây để lắng nghe bạn. 🛡️" }]
+        parts: [{ text: "Chào bạn, mình là trợ lý AI tâm lý. Mình ở đây để lắng nghe và đồng hành cùng bạn. Bạn cứ thoải mái chia sẻ nhé, không gian này là của bạn. 🛡️💖" }]
       }
     ];
 
-    function appendMessage(role, text) {
+    // Hàm thêm tin nhắn vào giao diện
+    function appendMessage(role, text, isError = false) {
       const div = document.createElement('div');
-      div.className = role === 'user' ? 'user-msg p-3 text-sm shadow-sm mb-3' : 'ai-msg p-3 text-sm shadow-sm mb-3';
-      div.innerHTML = role === 'model' ? marked.parse(text) : text.replace(/\n/g, '<br>');
+      div.className = isError 
+        ? 'error-msg' 
+        : (role === 'user' ? 'user-msg p-4 text-sm shadow-sm mb-4' : 'ai-msg p-4 text-sm shadow-sm mb-4');
+      
+      // Sử dụng marked để render Markdown cho tin nhắn của AI, thay thế xuống dòng cho user
+      div.innerHTML = (role === 'model' && !isError) ? marked.parse(text) : text.replace(/\n/g, '<br>');
+      
       chatHistoryDiv.appendChild(div);
-      chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
+      chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight; // Tự động cuộn xuống cuối
     }
 
+    // Hàm hiển thị hiệu ứng đang nhập
     function showLoading() {
       const div = document.createElement('div');
       div.id = 'loadingIndicator';
-      div.className = 'ai-msg p-3 text-sm shadow-sm mb-3 typing-indicator';
-      div.innerHTML = '<span></span><span></span><span></span>';
+      div.className = 'ai-msg p-4 text-sm shadow-sm mb-4 typing-indicator flex items-center';
+      div.innerHTML = 'AI đang suy nghĩ <span></span><span></span><span></span>';
       chatHistoryDiv.appendChild(div);
       chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
     }
 
+    // Hàm xóa hiệu ứng đang nhập
     function removeLoading() {
       const loading = document.getElementById('loadingIndicator');
       if(loading) loading.remove();
     }
 
+    // Xử lý sự kiện gửi tin nhắn
     sendBtn.addEventListener('click', async () => {
       const userText = userPromptInput.value.trim();
       if (!userText) return;
 
+      // 1. Hiển thị tin nhắn của người dùng
       appendMessage('user', userText);
       userPromptInput.value = '';
+      userPromptInput.style.height = 'auto'; // Reset chiều cao textarea
       showLoading();
 
       try {
-        // Gọi đến API của chính trang web này (được host trên Vercel)
+        // 2. Gửi yêu cầu lên Server Vercel (api/chat.js)
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
-            history: conversationHistory, // Gửi kèm lịch sử cũ
-            message: userText // Gửi tin nhắn mới
+            history: conversationHistory, // Gửi kèm lịch sử để AI nhớ ngữ cảnh
+            message: userText 
           })
         });
 
         const data = await response.json();
         removeLoading();
 
-        if (data.error) {
-          appendMessage('model', `⚠️ Lỗi: ${data.error}`);
+        if (!response.ok || data.error) {
+          // Hiển thị lỗi nếu server trả về lỗi
+          appendMessage('model', `Lỗi: ${data.error}`, true);
         } else {
+          // Hiển thị phản hồi từ AI
           appendMessage('model', data.reply);
-          // Cập nhật lịch sử client
+          
+          // Cập nhật lịch sử hội thoại
           conversationHistory.push({ role: "user", parts: [{ text: userText }] });
           conversationHistory.push({ role: "model", parts: [{ text: data.reply }] });
         }
       } catch (error) {
+        // Xử lý lỗi mạng
         removeLoading();
-        appendMessage('model', "⚠️ Không thể kết nối tới Server.");
+        appendMessage('model', `Lỗi kết nối. Vui lòng kiểm tra mạng của bạn.`, true);
       }
     });
 
-    /* --- LOGIC EMAIL CŨ --- */
-    document.getElementById('sendEmailBtn').addEventListener('click', () => {
-        const name = document.getElementById('emailName').value || 'Ẩn danh';
-        const msg = document.getElementById('emailMessage').value;
-        window.location.href = `mailto:admin@example.com?subject=Tâm sự từ ${name}&body=${msg}`;
+    // Cho phép ấn Enter để gửi (Shift+Enter để xuống dòng)
+    userPromptInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendBtn.click();
+      }
+    });
+
+    // Tự động thay đổi chiều cao textarea khi nhập
+    userPromptInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
     });
   </script>
 </body>
